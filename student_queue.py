@@ -1,7 +1,21 @@
-class Node(object):
-    def __init__(self, value):
+from random import randint
+
+NUMBER_OF_STUDENTS = 1200
+DEFAULT_DRIVE_TIME = 30
+
+# student class by Antonio
+class Student:
+    def __init__(self, slides_seen, driving_time, start_time, value):
+        self.slides_seen = slides_seen
+        self.driving_time = driving_time
+        self.start_time = start_time
         self.value = value
-        self.next  = None
+        self.next = None
+
+# class Node(object):
+#     def __init__(self, value):
+#         self.value = value
+#         self.next  = None
 
 class LinkedCircularQueue(object):
     def __init__(self, head=None, tail=None):
@@ -43,13 +57,13 @@ class LinkedCircularQueue(object):
         back  = self.tail
         if front is not None and back is not None:
             while back != front:
-                print(front.value, end=" ")
+                print(front.start_time, end=" ")
                 front = front.next
-                print(back.value)
+                print(back.start_time)
         else:
             print("Circular queue is empty !!")
 
-    def get_size(self):
+    def __len__(self):
         """
         Traverse from front to back and count students
         """
@@ -60,43 +74,15 @@ class LinkedCircularQueue(object):
                 self.head = self.head.next
         return size
 
-def main():
-    # Initialize students
-    student1 = Node(1)
-    student2 = Node(2)
-    student3 = Node(3)
-    student4 = Node(4)
-    student5 = Node(5)
-    linked_circular_queue = LinkedCircularQueue()
 
-    # Initial tests
-    linked_circular_queue.display()
-    print(linked_circular_queue.is_empty())
-    print(linked_circular_queue.get_size())
-    print()
+student_queue = LinkedCircularQueue()
+arrival_times_list = []
+for i in range(NUMBER_OF_STUDENTS):
+    arrival_times_list.append(randint(0,43200))
+arrival_times_list.sort()
 
-    # Test enqueue
-    linked_circular_queue.enqueue(student5)
-    linked_circular_queue.enqueue(student3)
-    linked_circular_queue.enqueue(student1)
-    linked_circular_queue.enqueue(student4)
-    linked_circular_queue.enqueue(student2)
-    linked_circular_queue.display()             # doesn't work
-    print()
+for i in range(NUMBER_OF_STUDENTS):
+    s = Student([], DEFAULT_DRIVE_TIME, arrival_times_list[i], 0)
+    student_queue.enqueue(s)
 
-    # Test dequeue
-    linked_circular_queue.dequeue()
-    linked_circular_queue.dequeue()
-    linked_circular_queue.display()
-    print()
-
-    # Test peek
-    print(linked_circular_queue.peek_front())
-    print(linked_circular_queue.peek_back())
-    print()
-
-    # Final tests
-    print(linked_circular_queue.is_empty())
-    print(linked_circular_queue.get_size())
-
-main()
+student_queue.display()
