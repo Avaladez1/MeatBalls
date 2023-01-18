@@ -60,22 +60,6 @@ class LinkedCircularQueue(object):
                 self.head = self.head.next
         return size
 
-    def peek_front(self):
-        front = self.head
-        return front.value
-
-    def peek_back(self):
-        back = self.tail
-        return back.value
-
-    def is_empty(self):
-        first = self.head
-        last  = self.tail
-        if first is None and last is None:
-            return True
-        else:
-            return False
-
 def main():
     # Initialize students
     student1 = Node(1)
