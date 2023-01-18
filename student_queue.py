@@ -77,12 +77,29 @@ class LinkedCircularQueue(object):
 
 student_queue = LinkedCircularQueue()
 arrival_times_list = []
-for i in range(NUMBER_OF_STUDENTS):
-    arrival_times_list.append(randint(0,43200))
-arrival_times_list.sort()
+def generate_arrival_times(list: list):
+    list = []
+    for i in range(NUMBER_OF_STUDENTS):
+        list.append(randint(0,43200))
+    list.sort()
+    return list
+
+arrival_times_list = generate_arrival_times(arrival_times_list)
 
 for i in range(NUMBER_OF_STUDENTS):
     s = Student([], DEFAULT_DRIVE_TIME, arrival_times_list[i], 0)
     student_queue.enqueue(s)
+
+# RUN A DAY
+
+arrival_times_list = generate_arrival_times(arrival_times_list)
+
+for i in range(NUMBER_OF_STUDENTS):
+    if i == 0:
+        s = student_queue.head
+    else:
+        s = s.next
+    s.start_time = arrival_times_list[i]
+    
 
 student_queue.display()
