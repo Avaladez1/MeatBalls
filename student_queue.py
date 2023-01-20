@@ -1,21 +1,29 @@
 from random import randint
+from random import shuffle
 
 NUMBER_OF_STUDENTS = 1200
 DEFAULT_DRIVE_TIME = 30
+DAYS = ["M", "T", "W", "R", "F"]
+STUDENT_LIST = []
 
 # student class by Antonio
 class Student:
-    def __init__(self, slides_seen, driving_time, start_time, value):
-        self.slides_seen = slides_seen
-        self.driving_time = driving_time
-        self.start_time = start_time
-        self.value = value
+    def __init__(self):
+        self.slides_seen = []
+         # TODO randomize driving time between 15-25 seconds maybe 
+        self.driving_time = DEFAULT_DRIVE_TIME
         self.next = None
-
-# class Node(object):
-#     def __init__(self, value):
-#         self.value = value
-#         self.next  = None
+        #random with weights to prioritize 2&3
+        number_of_days = randint(1,5)
+        #random with weights to prioritize MWF if 3, TR if 2.
+        self.days = ["M", "T", "W", "R", "F"]
+        shuffle(self.days)
+        self.days = self.days[0:number_of_days]
+        self.arrival_times = []
+        average_arrival = randint(0,43200)
+        for i in range(len(self.days)):
+            self.arrival_times.append(randint(-600,600)+average_arrival)
+        self.schedule = dict(zip(self.days, self.arrival_times))
 
 class LinkedCircularQueue(object):
     def __init__(self, head=None, tail=None):
@@ -34,7 +42,7 @@ class LinkedCircularQueue(object):
 
         self.tail = item
         item.next = self.head
-        return self.tail.value
+        return self.tail.arrival_times
 
     def dequeue(self):
         """
@@ -42,7 +50,7 @@ class LinkedCircularQueue(object):
         making the preceding node as the new head
         """
         if self.head is not None:
-            deleted = self.head.value
+            deleted = self.head.arrival_times
             self.head = self.head.next
         else:
             deleted = None
@@ -57,9 +65,9 @@ class LinkedCircularQueue(object):
         back  = self.tail
         if front is not None and back is not None:
             while back != front:
-                print(front.start_time, end=" ")
+                print(front.schedule, end="\n")
                 front = front.next
-                print(back.start_time)
+                #print(back.schedule)
         else:
             print("Circular queue is empty !!")
 
@@ -86,11 +94,20 @@ def generate_arrival_times(list: list):
 
 arrival_times_list = generate_arrival_times(arrival_times_list)
 
+
 for i in range(NUMBER_OF_STUDENTS):
-    s = Student([], DEFAULT_DRIVE_TIME, arrival_times_list[i], 0)
-    student_queue.enqueue(s)
+    s = Student()
+    STUDENT_LIST.append(s)
 
 # RUN A DAY
+# (this is just an example)
+mondays = 0
+for student in STUDENT_LIST:
+    if "M" in student.schedule:
+        student_queue.enqueue(student)
+        mondays += 1
+
+        
 
 arrival_times_list = generate_arrival_times(arrival_times_list)
 
@@ -101,5 +118,6 @@ for i in range(NUMBER_OF_STUDENTS):
         s = s.next
     s.start_time = arrival_times_list[i]
     
-
 student_queue.display()
+
+print(mondays)
