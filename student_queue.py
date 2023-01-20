@@ -1,9 +1,9 @@
-from random import randint
-from random import shuffle
+from random import randint, shuffle, choices
 
 NUMBER_OF_STUDENTS = 1200
 DEFAULT_DRIVE_TIME = 30
 DAYS = ["M", "T", "W", "R", "F"]
+NUMBERS = [1, 2, 3, 4, 5]
 STUDENT_LIST = []
 
 # student class by Antonio
@@ -14,11 +14,12 @@ class Student:
         self.driving_time = DEFAULT_DRIVE_TIME
         self.next = None
         #random with weights to prioritize 2&3
-        number_of_days = randint(1,5)
+        self.number_of_days = choices(NUMBERS, weights=(10, 40, 40, 20, 10), k=1)[0]
+        print(self.number_of_days)
         #random with weights to prioritize MWF if 3, TR if 2.
         self.days = ["M", "T", "W", "R", "F"]
         shuffle(self.days)
-        self.days = self.days[0:number_of_days]
+        self.days = self.days[0:self.number_of_days]
         self.arrival_times = []
         average_arrival = randint(0,43200)
         for i in range(len(self.days)):
