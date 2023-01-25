@@ -1,10 +1,9 @@
 from random import randint, shuffle, choices
 
-NUMBER_OF_STUDENTS = 1200
 DEFAULT_DRIVE_TIME = 30
 DAYS = ["M", "T", "W", "R", "F"]
 NUMBERS = [1, 2, 3, 4, 5]
-STUDENT_LIST = []
+
 
 # student class by Antonio
 class Student:
@@ -15,7 +14,7 @@ class Student:
         self.next = None
         #random with weights to prioritize 2&3
         self.number_of_days = choices(NUMBERS, weights=(10, 40, 40, 20, 10), k=1)[0]
-        print(self.number_of_days)
+        # print(self.number_of_days)
         #random with weights to prioritize MWF if 3, TR if 2.
         self.days = ["M", "T", "W", "R", "F"]
         shuffle(self.days)
@@ -84,41 +83,38 @@ class LinkedCircularQueue(object):
         return size
 
 
-student_queue = LinkedCircularQueue()
-arrival_times_list = []
-def generate_arrival_times(list: list):
-    list = []
-    for i in range(NUMBER_OF_STUDENTS):
-        list.append(randint(0,43200))
-    list.sort()
-    return list
+# student_queue = LinkedCircularQueue()
+# arrival_times_list = []
+# def generate_arrival_times(list: list):
+#     list = []
+#     for i in range(NUMBER_OF_STUDENTS):
+#         list.append(randint(0,43200))
+#     list.sort()
+#     return list
 
-arrival_times_list = generate_arrival_times(arrival_times_list)
+# arrival_times_list = generate_arrival_times(arrival_times_list)
 
-
-for i in range(NUMBER_OF_STUDENTS):
-    s = Student()
-    STUDENT_LIST.append(s)
+def generate_students(list: list, i: int):
+    for n in range(i):
+        s = Student()
+        list.append(s)
 
 # RUN A DAY
 # (this is just an example)
-mondays = 0
-for student in STUDENT_LIST:
-    if "M" in student.schedule:
-        student_queue.enqueue(student)
-        mondays += 1
+# mondays = 0
+# for student in STUDENT_LIST:
+#     if "M" in student.schedule:
+#         student_queue.enqueue(student)
+#         mondays += 1
 
         
 
-arrival_times_list = generate_arrival_times(arrival_times_list)
+# arrival_times_list = generate_arrival_times(arrival_times_list)
 
-for i in range(NUMBER_OF_STUDENTS):
-    if i == 0:
-        s = student_queue.head
-    else:
-        s = s.next
-    s.start_time = arrival_times_list[i]
+# for i in range(NUMBER_OF_STUDENTS):
+#     if i == 0:
+#         s = student_queue.head
+#     else:
+#         s = s.next
+#     s.start_time = arrival_times_list[i]
     
-student_queue.display()
-
-print(mondays)
