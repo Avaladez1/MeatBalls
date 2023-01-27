@@ -61,3 +61,11 @@ for day in sq.DAYS:
 
 for student in STUDENT_LIST:
     print(student.driving_time, student.slides_seen)
+
+def percentage_of_slides_seen(student: sq.Student) -> float:
+    percentage = (len(student.slides_seen) / SLIDE_LENGTH) * 100
+    return percentage
+
+# Example usage
+for student in STUDENT_LIST:
+    print(f"{student} has seen {percentage_of_slides_seen(student)}% of the slides.")
