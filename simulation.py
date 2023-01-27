@@ -13,7 +13,7 @@ sq.generate_students(STUDENT_LIST, 1200)
 # create sign
 sign = ll.CircularLinkedList()
 # put slides in the sign
-for i in range(1, 21):
+for i in range(1, 81):
     sign.append(i)
 
 # DAY SIMULATION FUNCTIONS
@@ -49,7 +49,7 @@ def simulate_day(day: str):
 
 def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
     temp_list = []
-    
+
 
 for day in sq.DAYS:
     student_queue = sq.LinkedCircularQueue()
