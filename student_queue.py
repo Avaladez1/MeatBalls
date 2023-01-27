@@ -1,8 +1,10 @@
 from random import randint, shuffle, choices
 
-DEFAULT_DRIVE_TIME = 30
+# DEFAULT_DRIVE_TIME = 30
 DAYS = ["M", "T", "W", "R", "F"]
 NUMBERS = [1, 2, 3, 4, 5]
+#Blocks of time where students come; Weighted (6:20,8,9:40,11:20,1:00,2:40,4:20,6, [randomtime])
+TIME_BLOCKS = [1200,7200,13200,19200,25200,31200,37200,43200,0]
 
 
 # student class by Antonio
@@ -13,21 +15,23 @@ class Student:
         self.driving_time = randint(20, 30)
         self.next = None
         #random with weights to prioritize 2&3
-        self.number_of_days = choices(NUMBERS, weights=(10, 40, 40, 20, 10), k=1)[0]
+        self.number_of_days = choices(NUMBERS, weights=(1, 4, 4, 2, 1), k=1)[0]
         # print(self.number_of_days)
         #random with weights to prioritize MWF if 3, TR if 2.
         self.days = ["M", "T", "W", "R", "F"]
         shuffle(self.days)
         self.days = self.days[0:self.number_of_days]
         self.arrival_times = []
-        average_arrival = randint(0,43200)
+        average_arrival = choices(TIME_BLOCKS, weights=(1,2,5,5,5,3,3,1,1), k=1)[0]
+
+
         for i in range(len(self.days)):
-            if average_arrival < 600:
-                self.arrival_times.append(randint(0,1200)+average_arrival)
-            elif average_arrival > 42600:
-                self.arrival_times.append(average_arrival - randint(0,1200))
+            if average_arrival in TIME_BLOCKS and average_arrival != 0:
+                self.arrival_times.append(randint(-1199,1200)+average_arrival)
             else:
-                self.arrival_times.append(randint(-600,600)+average_arrival)
+                self.arrival_times.append(randint(0,43200))
+
+
         self.schedule = dict(zip(self.days, self.arrival_times))
 
 class LinkedCircularQueue(object):

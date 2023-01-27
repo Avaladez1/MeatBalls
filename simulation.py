@@ -54,4 +54,4 @@ for day in sq.DAYS:
 
 
 for student in STUDENT_LIST:
-    print(student.driving_time, student.slides_seen)
+    print(f"Driving time:{student.driving_time}  Arrival times:{student.arrival_times}  Slides seen:{student.slides_seen}")
