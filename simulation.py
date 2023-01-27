@@ -45,6 +45,13 @@ def simulate_day(day: str):
             student_queue.dequeue()
         timer += 1
 
+def elim_duplicates(slides:list):
+    """
+    Takes the list that it is given and turns it into a dictionary. This eliminates duplicate keys, and the result is turned back into a list and printed.
+    """
+    Slides_seen = list(dict.fromkeys(slides))
+    print(student.driving_time, Slides_seen)
+    
 # RESULTS FUNCTIONS
 
 def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
@@ -60,7 +67,8 @@ for day in sq.DAYS:
 
 
 for student in STUDENT_LIST:
-    print(student.driving_time, student.slides_seen)
+    # Prints the final lists of slides seen
+    elim_duplicates(student.slides_seen)
 
 def percentage_of_slides_seen(student: sq.Student) -> float:
     percentage = (len(student.slides_seen) / SLIDE_LENGTH) * 100
