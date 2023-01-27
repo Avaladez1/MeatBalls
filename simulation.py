@@ -13,7 +13,7 @@ sq.generate_students(STUDENT_LIST, 1200)
 # create sign
 sign = ll.CircularLinkedList()
 # put slides in the sign
-for i in range(1, 81):
+for i in range(1, 21):
     sign.append(i)
 
 # DAY SIMULATION FUNCTIONS
@@ -55,8 +55,16 @@ def elim_duplicates(slides:list):
 # RESULTS FUNCTIONS
 
 def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
-    temp_list = []
-
+    percentages = []
+    for i in range(len(sign)):
+        slide_sightings = 0
+        for student in list:
+            if circular.head.data in student.slides_seen:
+                slide_sightings += 1
+        percentages.append(slide_sightings / len(list))
+        circular.cycle()
+    for i in range(len(percentages)):
+        print(f"Slide #{i+1} was seen by {percentages[i]*100}% of students.")
 
 for day in sq.DAYS:
     student_queue = sq.LinkedCircularQueue()
@@ -77,3 +85,5 @@ def percentage_of_slides_seen(student: sq.Student) -> float:
 # Example usage
 for student in STUDENT_LIST:
     print(f"{student} has seen {percentage_of_slides_seen(student)}% of the slides.")
+
+average_students_that_saw_slide(STUDENT_LIST, sign)
