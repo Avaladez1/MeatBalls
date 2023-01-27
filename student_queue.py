@@ -10,7 +10,7 @@ class Student:
     def __init__(self):
         self.slides_seen = []
          # TODO randomize driving time between 15-25 seconds maybe 
-        self.driving_time = DEFAULT_DRIVE_TIME
+        self.driving_time = randint(20, 30)
         self.next = None
         #random with weights to prioritize 2&3
         self.number_of_days = choices(NUMBERS, weights=(10, 40, 40, 20, 10), k=1)[0]
@@ -22,7 +22,12 @@ class Student:
         self.arrival_times = []
         average_arrival = randint(0,43200)
         for i in range(len(self.days)):
-            self.arrival_times.append(randint(-600,600)+average_arrival)
+            if average_arrival < 600:
+                self.arrival_times.append(randint(0,1200)+average_arrival)
+            elif average_arrival > 42600:
+                self.arrival_times.append(average_arrival - randint(0,1200))
+            else:
+                self.arrival_times.append(randint(-600,600)+average_arrival)
         self.schedule = dict(zip(self.days, self.arrival_times))
 
 class LinkedCircularQueue(object):
