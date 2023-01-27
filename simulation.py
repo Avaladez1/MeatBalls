@@ -60,6 +60,11 @@ def percentage_of_slides_seen(student: sq.Student) -> float:
     percentage = (len(student.slides_seen) / SLIDE_LENGTH) * 100
     return percentage
 
+import statistics as s
 # Example usage
+oble = []
 for student in STUDENT_LIST:
-    print(f"{student} has seen {percentage_of_slides_seen(student)}% of the slides.")
+    oble.append(percentage_of_slides_seen(student))
+
+    
+print(f"{student} average {s.mean(oble)}% of the slides.")
