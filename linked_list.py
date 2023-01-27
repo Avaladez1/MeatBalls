@@ -33,6 +33,14 @@ class CircularLinkedList:
             time.sleep(0.2)
             # if current == self.head:
                 # break
+    
+    def __len__(self):
+        int_to_return = 0
+        if self.head:
+            int_to_return += 1
+            
+        else:
+            pass
 
 # cll = CircularLinkedList()
 # for i in range(1,21):

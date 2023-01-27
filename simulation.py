@@ -16,7 +16,7 @@ sign = ll.CircularLinkedList()
 for i in range(1, 21):
     sign.append(i)
 
-# MONDAY
+# DAY SIMULATION FUNCTIONS
 
 def queue_day(day: str):
     students_to_enqueue = []
@@ -51,6 +51,11 @@ def elim_duplicates(slides:list):
     """
     Slides_seen = list(dict.fromkeys(slides))
     print(student.driving_time, Slides_seen)
+# RESULTS FUNCTIONS
+
+def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
+    temp_list = []
+    
 
 for day in sq.DAYS:
     student_queue = sq.LinkedCircularQueue()
