@@ -16,9 +16,49 @@ class Student:
         self.number_of_days = choices(NUMBERS, weights=(10, 40, 40, 20, 10), k=1)[0]
         # print(self.number_of_days)
         #random with weights to prioritize MWF if 3, TR if 2.
-        self.days = ["M", "T", "W", "R", "F"]
-        shuffle(self.days)
-        self.days = self.days[0:self.number_of_days]
+
+        day_choices = ["M", "T", "W", "R", "F"]
+
+        # self.days = ["M", "T", "W", "R", "F"]
+        self.days = []
+
+
+        for i in range (self.number_of_days):
+            if self.number_of_days == 1:
+                self.days.append(choices(day_choices, weights = (10,10,10,10,10), k = 1)[0])
+            elif self.number_of_days == 2:
+                self.days.append(choices(day_choices, weights = (10,50,10,50,10), k = 1)[0])
+                if "T" in self.days:
+                    self.days.append(choices(day_choices, weights = (10,0,10,50,10), k = 1)[0])
+                elif "R" in self.days:
+                    self.days.append(choices(day_choices, weights = (10,50,10,0,10), k = 1)[0])
+            elif self.number_of_days == 3:
+                self.days.append(choices(day_choices, weights = (50,10,50,10,50), k = 1)[0])
+                if "M" in self.days:
+                    self.days.append(choices(day_choices, weights = (0,10,50,10,50), k = 1)[0])
+                elif "W" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,10,0,10,50), k = 1)[0])
+                elif "F" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,10,50,10,0), k = 1)[0])
+            elif self.number_of_days == 4:
+                self.days.append(choices(day_choices, weights = (50,50,50,50,10), k = 1)[0])
+                if "M" in self.days:
+                    self.days.append(choices(day_choices, weights = (0,50,50,50,10), k = 1)[0])
+                elif "T" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,0,50,50,10), k = 1)[0])
+                elif "W" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,50,0,50,10), k = 1)[0])
+                elif "R" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,50,50,0,10), k = 1)[0])
+                elif "F" in self.days:
+                    self.days.append(choices(day_choices, weights = (50,50,50,50,0), k = 1)[0])
+            elif self.number_of_days == 5:
+                self.days = ["M", "T", "W", "R", "F"]
+
+        self.days = list(dict.fromkeys(self.days))
+
+        # shuffle(self.days)
+        # self.days = self.days[0:self.number_of_days]
         self.arrival_times = []
         average_arrival = randint(0,43200)
         for i in range(len(self.days)):
