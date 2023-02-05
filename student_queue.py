@@ -77,6 +77,10 @@ class LinkedCircularQueue(object):
 
 student_queue = LinkedCircularQueue()
 arrival_times_list = []
+for i in range(NUMBER_OF_STUDENTS):
+    arrival_times_list.append(randint(0,43200))
+arrival_times_list.sort()
+
 def generate_arrival_times(list: list):
     list = []
     for i in range(NUMBER_OF_STUDENTS):
@@ -90,6 +94,17 @@ for i in range(NUMBER_OF_STUDENTS):
     s = Student([], DEFAULT_DRIVE_TIME, arrival_times_list[i], 0)
     student_queue.enqueue(s)
 
+#generates driving time
+def generate_driving_times(num_students, default_drive_time):
+    driving_times = []
+    for i in range(num_students):
+        driving_times.append(randint(0, default_drive_time))
+    return driving_times
+
+# Example usage
+driving_times = generate_driving_times(NUMBER_OF_STUDENTS, DEFAULT_DRIVE_TIME)
+
+
 # RUN A DAY
 
 arrival_times_list = generate_arrival_times(arrival_times_list)
@@ -101,5 +116,11 @@ for i in range(NUMBER_OF_STUDENTS):
         s = s.next
     s.start_time = arrival_times_list[i]
     
+#displays the driving time
 
 student_queue.display()
+current_student = student_queue.head
+while current_student.next != student_queue.head:
+    print(current_student.start_time)
+    current_student = current_student.next
+print(current_student.start_time)
