@@ -132,38 +132,10 @@ class LinkedCircularQueue(object):
         return size
 
 
-# student_queue = LinkedCircularQueue()
-# arrival_times_list = []
-# def generate_arrival_times(list: list):
-#     list = []
-#     for i in range(NUMBER_OF_STUDENTS):
-#         list.append(randint(0,43200))
-#     list.sort()
-#     return list
-
-# arrival_times_list = generate_arrival_times(arrival_times_list)
 
 def generate_students(list: list, i: int):
     for n in range(i):
         s = Student()
         list.append(s)
 
-# RUN A DAY
-# (this is just an example)
-# mondays = 0
-# for student in STUDENT_LIST:
-#     if "M" in student.schedule:
-#         student_queue.enqueue(student)
-#         mondays += 1
-
         
-
-# arrival_times_list = generate_arrival_times(arrival_times_list)
-
-# for i in range(NUMBER_OF_STUDENTS):
-#     if i == 0:
-#         s = student_queue.head
-#     else:
-#         s = s.next
-#     s.start_time = arrival_times_list[i]
-    
