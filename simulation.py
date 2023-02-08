@@ -29,13 +29,16 @@ def queue_day(day: str):
         student_queue.enqueue(student)
 
 def simulate_day(day: str):
+    # timer runs from 0 (6:00 AM) to 44400 (6:20 PM) so that no students arrive after the day ends or before the day starts
     timer = 0
-    while timer <= 43200:
+    while timer <= 50000:
         # cycle the sign every 20 "seconds"
         if timer % SLIDE_LENGTH == 0:
             sign.cycle()
-        # when the student arrives, append slides to their slides_seen list
-        while timer == student_queue.head.schedule[day]:
+        # FIRST, check if the queue head exists (if the queue is not empty), THEN, check the head's schedule
+        # The order of the AND matters, because python will only do check until it finds a false, and then the rest of the true/false statements will not get checked
+        # if it checks the schedule of the head first, when there is no head, you get a NoneType error
+        while student_queue.head and timer == student_queue.head.schedule[day]:
             # The following is an expanded equation to look into the future to see how many slides a student SHOULD see.
             # how long the slide has already run before the student arrived
             current_slide_ellapsed_time = student_queue.head.schedule[day] % SLIDE_LENGTH
@@ -45,9 +48,9 @@ def simulate_day(day: str):
             time_to_see_additional_slides = student_queue.head.driving_time - current_slide_remaining_time
             # number of slides a student should see
             number_of_slides_to_see = ceil(time_to_see_additional_slides / SLIDE_LENGTH) + 1
-            print(f"arrival time: {student_queue.head.schedule[day]}")
-            print(f"driving time: {student_queue.head.driving_time}")
-            print(f"slides seen: {number_of_slides_to_see}")
+            # print(f"arrival time: {student_queue.head.schedule[day]}")
+            # print(f"driving time: {student_queue.head.driving_time}")
+            # print(f"slides seen: {number_of_slides_to_see}")
             current_slide = sign.head
             for i in range(number_of_slides_to_see):
                 if current_slide not in student_queue.head.slides_seen:
@@ -82,13 +85,11 @@ def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList)
         print(f"Slide #{i+1} was seen by {percentages[i]*100}% of students.")
 
 
+student_queue = sq.LinkedCircularQueue()
 def simulate_week():
     for day in sq.DAYS:
-        global student_queue
-        student_queue = sq.LinkedCircularQueue()
         queue_day(day)
         simulate_day(day)
-        # student_queue = None
         student_queue.display()
 
 

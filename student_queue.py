@@ -3,7 +3,9 @@ from random import randint, shuffle, choices
 # DEFAULT_DRIVE_TIME = 30
 DAYS = ["M", "T", "W", "R", "F"]
 NUMBERS = [1, 2, 3, 4, 5]
-#Blocks of time where students come; Weighted (6:20,8,9:40,11:20,1:00,2:40,4:20,6, [randomtime])
+#Blocks of time where students come; Weighted (6:20,8,9:40,11:20,1:00,2:40,4:20,6, [randomtime])\
+# In this list, the time block 0 represents a student arriving at a completely random time (to come to the library for example)
+# 0 is never actually used as a value
 TIME_BLOCKS = [1200,7200,13200,19200,25200,31200,37200,43200,0]
 
 
@@ -66,10 +68,10 @@ class Student:
 
 
         for i in range(len(self.days)):
-            if average_arrival in TIME_BLOCKS and average_arrival != 0:
+            if average_arrival != 0:
                 self.arrival_times.append(randint(-1199,1200)+average_arrival)
             else:
-                self.arrival_times.append(randint(0,43200))
+                self.arrival_times.append(randint(1,43200))
 
 
         self.schedule = dict(zip(self.days, self.arrival_times))
@@ -90,7 +92,6 @@ class LinkedCircularQueue(object):
             self.head = item
 
         self.tail = item
-        item.next = self.head
         return self.tail.arrival_times
 
     def dequeue(self):
@@ -118,7 +119,7 @@ class LinkedCircularQueue(object):
                 front = front.next
                 #print(back.schedule)
         else:
-            print("Circular queue is empty !!")
+            print("Queue is empty!")
 
     def __len__(self):
         """
