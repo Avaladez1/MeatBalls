@@ -13,10 +13,10 @@ sq.generate_students(STUDENT_LIST, 1200)
 # create sign
 sign = ll.CircularLinkedList()
 # put slides in the sign
-for i in range(1, 21):
+for i in range(1, 81):
     sign.append(i)
 
-# MONDAY
+# DAY SIMULATION FUNCTIONS
 
 def queue_day(day: str):
     students_to_enqueue = []
@@ -45,6 +45,19 @@ def simulate_day(day: str):
             student_queue.dequeue()
         timer += 1
 
+def elim_duplicates(slides:list):
+    """
+    Takes the list that it is given and turns it into a dictionary. This eliminates duplicate keys, and the result is turned back into a list and printed.
+    """
+    Slides_seen = list(dict.fromkeys(slides))
+    print(student.driving_time, Slides_seen)
+    
+# RESULTS FUNCTIONS
+
+def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
+    temp_list = []
+
+
 for day in sq.DAYS:
     student_queue = sq.LinkedCircularQueue()
     queue_day(day)
@@ -55,3 +68,13 @@ for day in sq.DAYS:
 
 for student in STUDENT_LIST:
     print(f"Driving time:{student.driving_time}  Arrival times:{student.arrival_times}  Slides seen:{student.slides_seen}")
+    # Prints the final lists of slides seen
+    elim_duplicates(student.slides_seen)
+
+def percentage_of_slides_seen(student: sq.Student) -> float:
+    percentage = (len(student.slides_seen) / SLIDE_LENGTH) * 100
+    return percentage
+
+# Example usage
+for student in STUDENT_LIST:
+    print(f"{student} has seen {percentage_of_slides_seen(student)}% of the slides.")
