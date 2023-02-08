@@ -4,7 +4,7 @@ from math import ceil
 
 STUDENT_LIST = []
 NUMBER_OF_STUDENTS = 1200
-SLIDE_LENGTH = 2
+SLIDE_LENGTH = 20
 
 # create queue
 
@@ -34,11 +34,9 @@ def simulate_day(day: str):
         # cycle the sign every 20 "seconds"
         if timer % SLIDE_LENGTH == 0:
             sign.cycle()
-        # when the student arrives, if they haven't already seen the current slide, append it to their slides_seen list
+        # when the student arrives, append slides to their slides_seen list
         while timer == student_queue.head.schedule[day]:
-            # if sign.head.data not in student_queue.head.slides_seen:
-            #     student_queue.head.slides_seen.append(sign.head.data)
-            # slides_to_see = ceil(((student_queue.head.schedule[day] + student_queue.head.driving_time) % SLIDE_LENGTH) / SLIDE_LENGTH) + 1
+            # The following is an expanded equation to look into the future to see how many slides a student SHOULD see.
             # how long the slide has already run before the student arrived
             current_slide_ellapsed_time = student_queue.head.schedule[day] % SLIDE_LENGTH
             # how long the student will see their first slide 
@@ -55,11 +53,6 @@ def simulate_day(day: str):
                 if current_slide not in student_queue.head.slides_seen:
                     student_queue.head.slides_seen.append(current_slide)
                 current_slide = current_slide.next
-            # if student_queue.head.schedule[day] % SLIDE_LENGTH < abs(student_queue.head.driving_time-SLIDE_LENGTH):
-            #     student_queue.head.slides_seen.append(sign.head.next.data)
-            # else:
-            #     student_queue.head.slides_seen.append(sign.head.next.data)
-            #     student_queue.head.slides_seen.append(sign.head.next.next.data)
             student_queue.dequeue()
         timer += 1
 
@@ -73,11 +66,15 @@ def elim_duplicates(slides:list):
 # RESULTS FUNCTIONS
 
 def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList):
+    """
+    TAKES: list of students, list of slides.
+    Prints "Slide X was seen by N% of students." for each slide
+    """
     percentages = []
     for i in range(len(sign)):
         slide_sightings = 0
         for student in list:
-            if circular.head.data in student.slides_seen:
+            if circular.head in student.slides_seen:
                 slide_sightings += 1
         percentages.append(slide_sightings / len(list))
         circular.cycle()
