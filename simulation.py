@@ -81,16 +81,19 @@ def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList)
     for i in range(len(percentages)):
         print(f"Slide #{i+1} was seen by {percentages[i]*100}% of students.")
 
-for day in sq.DAYS:
-    student_queue = sq.LinkedCircularQueue()
-    queue_day(day)
-    simulate_day(day)
-    # student_queue = None
-    student_queue.display()
+
+def simulate_week():
+    for day in sq.DAYS:
+        global student_queue
+        student_queue = sq.LinkedCircularQueue()
+        queue_day(day)
+        simulate_day(day)
+        # student_queue = None
+        student_queue.display()
 
 
 for student in STUDENT_LIST:
-    print(f"Driving time:{student.driving_time}  Arrival times:{student.arrival_times}  Slides seen:{student.slides_seen}")
+    # print(f"Driving time:{student.driving_time}  Arrival times:{student.arrival_times}  Slides seen:{student.slides_seen}")
     # Prints the final lists of slides seen
     elim_duplicates(student.slides_seen)
 
@@ -100,9 +103,11 @@ def percentage_of_slides_seen(student: sq.Student) -> float:
 
 import statistics as s
 # Example usage
+
+simulate_week()
 oble = []
 for student in STUDENT_LIST:
     oble.append(percentage_of_slides_seen(student))
-print(f"{student} average {s.mean(oble)}% of the slides.")
+print(f"The average student saw {s.mean(oble)}% of the slides.")
 
 average_students_that_saw_slide(STUDENT_LIST, sign)
