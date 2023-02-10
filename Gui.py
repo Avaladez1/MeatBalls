@@ -48,24 +48,33 @@ text3 = tk.Entry(background_label, fg='black', width=8)
 text3.place(x=560, y=0)
 
 def Slide_length_change():
-    Sim.slide_length
+
+    Sim.slide_length=text3.get()
 
 button3 = tk.Button(background_label, text="Slide_Length", fg='black', height=2, width=10)
 button3.place(x=540,y=50)
 
-text4 = tk.Entry(background_label, fg='black', width=8)
-text4.place(x=820,y=0)
+# text boxes for driving times 
+text4 = tk.Entry(background_label, fg='black', width=6)
+text4.place(x=795,y=0)
+
+text5= tk.Entry(background_label, fg='black', width=6)
+text5.place(x=860,y=0)
 
 def set_drive_time():
-    Sim.student.driving_time
+    Sim.max_drive_time =text4.get()
+    Sim.min_drive_time =text5.get()
+
 
 button4 = tk.Button(background_label, text="Drive_Time", fg='black', height=2, width=10)
 button4.place(x=803,y=50)
 
-button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
-button5.place(x=390,y=140)
+# button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
+# button5.place(x=390,y=140)
 
 def Submit():
-
+    button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
+    button5.place(x=390,y=140)
+    button5=Sim.simulate_week()
 
 root.mainloop()
