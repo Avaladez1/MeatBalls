@@ -16,28 +16,32 @@ background_label = tk.Label(root, image=back)
 background_label.pack(fill="both", expand="yes")
 
 # Create buttons and entry widgets and place them on the background label
-text1 = tk.Entry(background_label, fg='black', width=20)
-text1.place(x=10,y=0)
+text1 = tk.Entry(background_label, fg='black', width=8)
+text1.place(x=40,y=0)
 
-button1 = tk.Button(background_label, text="Button 1", fg='black', height=2, width=15)
+button1 = tk.Button(background_label, text="Number_Students", fg='black', height=2, width=10)
 button1.place(x=20,y=50)
 
-text2 = tk.Entry(background_label, fg='black', width=20)
-text2.place(x=270,y=0)
+text2 = tk.Entry(background_label, fg='black', width=8)
+text2.place(x=295,y=0)
 
-button2 = tk.Button(background_label, text="Button 2", fg='black', height=2, width=15)
+button2 = tk.Button(background_label, text="Slide_Amount", fg='black', height=2, width=10)
 button2.place(x=280,y=50)
 
-text3 = tk.Entry(background_label, fg='black', width=20)
-text3.place(x=530, y=0)
+text3 = tk.Entry(background_label, fg='black', width=8)
+text3.place(x=560, y=0)
 
-button3 = tk.Button(background_label, text="Button 3", fg='black', height=2, width=15)
+button3 = tk.Button(background_label, text="Slide_Length", fg='black', height=2, width=10)
 button3.place(x=540,y=50)
 
-text4 = tk.Entry(background_label, fg='black', width=20)
-text4.place(x=793,y=0)
+text4 = tk.Entry(background_label, fg='black', width=8)
+text4.place(x=820,y=0)
 
-button4 = tk.Button(background_label, text="Button 4", fg='black', height=2, width=15)
+button4 = tk.Button(background_label, text="Drive_Time", fg='black', height=2, width=10)
 button4.place(x=803,y=50)
+
+button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
+button5.place(x=390,y=140)
+
 
 root.mainloop()
