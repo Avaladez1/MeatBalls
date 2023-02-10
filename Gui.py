@@ -1,5 +1,7 @@
 import tkinter as tk
 import os
+import simulation as Sim
+
 
 root = tk.Tk()
 root.geometry("1000x600")
