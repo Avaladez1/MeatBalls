@@ -7,14 +7,15 @@ NUMBERS = [1, 2, 3, 4, 5]
 # In this list, the time block 0 represents a student arriving at a completely random time (to come to the library for example)
 # 0 is never actually used as a value
 TIME_BLOCKS = [1200,7200,13200,19200,25200,31200,37200,43200,0]
-
+max_driving_time = 30
+min_driving_time = 20
 
 # student class by Antonio
 class Student:
     def __init__(self):
         self.slides_seen = []
          # TODO randomize driving time between 15-25 seconds maybe 
-        self.driving_time = randint(20, 30)
+        self.driving_time = randint(min_driving_time, max_driving_time)
         self.next = None
         #random with weights to prioritize 2&3
         self.number_of_days = choices(NUMBERS, weights=(1, 4, 4, 2, 1), k=1)[0]
@@ -134,17 +135,15 @@ class LinkedCircularQueue(object):
 
 
 #generates driving time
-def generate_driving_times(num_students, default_drive_time):
+def generate_driving_times(list_of_students):
     driving_times = []
-    for i in range(num_students):
-        driving_times.append(randint(0, default_drive_time))
+    for i in range(len(list_of_students)):
+        driving_times.append(randint(min_driving_time, max_driving_time))
     return driving_times
     
 
-def generate_students(list: list, i: int):
+def generate_students(list_to_generate: list, i: int):
+    list_to_generate.clear()
     for n in range(i):
-        list = []
         s = Student()
-        list.append(s)
-
-        
+        list_to_generate.append(s)
