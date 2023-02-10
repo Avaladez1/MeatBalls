@@ -42,7 +42,7 @@ def slide_amount_change():
 
 
 button2 = tk.Button(background_label, text="Slide_Amount", fg='black', height=2, width=10)
-button2.place(x=280,y=50)
+button2.place(x=275,y=50)
 
 text3 = tk.Entry(background_label, fg='black', width=8)
 text3.place(x=560, y=0)
