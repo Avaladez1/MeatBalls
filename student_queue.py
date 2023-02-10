@@ -133,6 +133,13 @@ class LinkedCircularQueue(object):
         return size
 
 
+#generates driving time
+def generate_driving_times(num_students, default_drive_time):
+    driving_times = []
+    for i in range(num_students):
+        driving_times.append(randint(0, default_drive_time))
+    return driving_times
+    
 
 def generate_students(list: list, i: int):
     for n in range(i):
