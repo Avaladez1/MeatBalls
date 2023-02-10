@@ -28,8 +28,13 @@ def queue_day(day: str):
         if day in student.schedule:
             students_to_enqueue.append(student)
             students_to_enqueue.sort(key = lambda x: x.schedule[day])
+    # generate random driving times for the day
+    daily_driving_times = sq.generate_driving_times(students_to_enqueue)
     for student in students_to_enqueue:
+        index_counter = 0
+        student.driving_time = daily_driving_times[index_counter]
         student_queue.enqueue(student)
+        index_counter += 1
 
 def simulate_day(day: str):
     # timer runs from 0 (6:00 AM) to 44400 (6:20 PM) so that no students arrive after the day ends or before the day starts
