@@ -136,6 +136,7 @@ class LinkedCircularQueue(object):
 
 def generate_students(list: list, i: int):
     for n in range(i):
+        list = []
         s = Student()
         list.append(s)
 
