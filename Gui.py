@@ -18,63 +18,66 @@ background_label = tk.Label(root, image=back)
 background_label.pack(fill="both", expand="yes")
 
 # Create buttons and entry widgets and place them on the background label
-text1 = tk.Entry(background_label, fg='black', width=8)
+text1 = tk.Entry(background_label, fg='lightgreen', width=8)
 text1.place(x=40,y=0)
 
 
 def set_students():
-    Sim.number_of_students=text1.get()
+    Sim.number_of_students=int(text1.get())
+    print(int(Sim.number_of_students))
 
 
-
-
-
-button1 = tk.Button(background_label, text="Number_Students", fg='black', height=2, width=10)
+button1 = tk.Button(background_label, text="Number_Students", fg='black', height=2, width=10,command=set_students)
 button1.place(x=20,y=50)
 
-text2 = tk.Entry(background_label, fg='black', width=8)
+text2 = tk.Entry(background_label, fg='lightgreen', width=8)
 text2.place(x=295,y=0)
 
 def slide_amount_change():
-    Sim.number_of_students=text2.get()
+    Sim.number_of_slides=int(text2.get())
+    print(int(Sim.number_of_slides))
 
 
-
-
-button2 = tk.Button(background_label, text="Slide_Amount", fg='black', height=2, width=10)
+button2 = tk.Button(background_label, text="Slide_Amount", fg='black', height=2, width=10,command=slide_amount_change)
 button2.place(x=275,y=50)
 
-text3 = tk.Entry(background_label, fg='black', width=8)
+text3 = tk.Entry(background_label, fg='lightgreen', width=8)
 text3.place(x=560, y=0)
 
 def Slide_length_change():
+    Sim.slide_length=int(text3.get())
+    print(int(Sim.slide_length))
 
-    Sim.slide_length=text3.get()
 
-button3 = tk.Button(background_label, text="Slide_Length", fg='black', height=2, width=10)
+button3 = tk.Button(background_label, text="Slide_Length", fg='black', height=2, width=10, command=Slide_length_change)
 button3.place(x=540,y=50)
 
 # text boxes for driving times 
-text4 = tk.Entry(background_label, fg='black', width=6)
+text4 = tk.Entry(background_label, fg='lightgreen', width=6)
 text4.place(x=795,y=0)
 
-text5= tk.Entry(background_label, fg='black', width=6)
+text5= tk.Entry(background_label, fg='lightgreen', width=6)
 text5.place(x=860,y=0)
 
 def set_drive_time():
-    Sim.max_drive_time =text4.get()
-    Sim.min_drive_time =text5.get()
+    Sim.sq.min_driving_time = int(text4.get())
+    Sim.sq.max_driving_time = int(text5.get())
+    print(f"max-{Sim.sq.max_driving_time} + min-{Sim.sq.min_driving_time}")
 
 
-button4 = tk.Button(background_label, text="Drive_Time", fg='black', height=2, width=10)
+button4 = tk.Button(background_label, text="Drive_Time", fg='black', height=2, width=10,command=set_drive_time)
 button4.place(x=803,y=50)
 
-# button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
-# button5.place(x=390,y=140)
-
 def Submit():
-    button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15)
-    button5.place(x=390,y=140)
-    button5=Sim.simulate_week()
+
+    set_students()
+    slide_amount_change()
+    Slide_length_change()
+    set_drive_time()
+    Sim.simulate_week()
+    Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign)
+  
+button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15,command=Submit)
+button5.place(x=390,y=140)
 
 root.mainloop()
