@@ -102,11 +102,19 @@ class LinkedCircularQueue(object):
         """
         if self.head is not None:
             deleted = self.head.arrival_times
-            self.head = self.head.next
+            if self.head == self.tail:
+                self.tail = None
+                self.head = None
+            else:
+                self.head = self.head.next
         else:
             deleted = None
             print("Circular queue is empty !!")
         return deleted
+
+    def clear(self):
+        self.head = None
+        self.tail = None
 
     def display(self):
         """
@@ -119,6 +127,10 @@ class LinkedCircularQueue(object):
                 print(front.schedule, end="\n")
                 front = front.next
                 #print(back.schedule)
+        elif front is not None:
+            print("there is a head but no tail")
+        elif back is not None:
+            print("there is a tail but no head")
         else:
             print("Queue is empty!")
 
@@ -127,10 +139,12 @@ class LinkedCircularQueue(object):
         Traverse from front to back and count students
         """
         size = 0
-        if self.head is not None and self.tail is not None:
-            while self.tail.next != self.head:
+        current_head = self.head
+        current_tail = self.tail
+        if current_head is not None and current_tail is not None:
+            while current_head.next is not None:
                 size += 1
-                self.head = self.head.next
+                current_head = current_head.next
         return size
 
 

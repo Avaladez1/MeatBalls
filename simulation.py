@@ -16,9 +16,6 @@ sq.generate_students(STUDENT_LIST, number_of_students)
 
 # create sign
 sign = ll.CircularLinkedList()
-# put slides in the sign
-for i in range(1, number_of_slides+1):
-    sign.append(i)
 
 # DAY SIMULATION FUNCTIONS ---------------------------------------------
 
@@ -27,11 +24,11 @@ def queue_day(day: str):
     for student in STUDENT_LIST:
         if day in student.schedule:
             students_to_enqueue.append(student)
-            students_to_enqueue.sort(key = lambda x: x.schedule[day])
+    students_to_enqueue.sort(key = lambda x: x.schedule[day])
     # generate random driving times for the day
     daily_driving_times = sq.generate_driving_times(students_to_enqueue)
+    index_counter = 0
     for student in students_to_enqueue:
-        index_counter = 0
         student.driving_time = daily_driving_times[index_counter]
         student_queue.enqueue(student)
         index_counter += 1
@@ -66,6 +63,8 @@ def simulate_day(day: str):
                 current_slide = current_slide.next
             student_queue.dequeue()
         timer += 1
+    # clearing the queue should be redundant, but i'm doing it anyway to avoid taking any chances
+    student_queue.clear()
 
 def elim_duplicates(slides:list):
     """
@@ -75,10 +74,17 @@ def elim_duplicates(slides:list):
     # print(student.driving_time, Slides_seen.value)
 
 def simulate_week():
+    # put slides in the sign
+    sign.clear()
+    for i in range(1, number_of_slides+1):
+        sign.append(i)
+    # reset student list with updated number of students
+    sq.generate_students(STUDENT_LIST, number_of_students)
     for day in sq.DAYS:
         queue_day(day)
+        # print(len(student_queue))
         simulate_day(day)
-        student_queue.display()
+        # student_queue.display()
     for student in STUDENT_LIST:
         # print(f"Driving time:{student.driving_time}  Arrival times:{student.arrival_times}  Slides seen:{student.slides_seen}")
         # Prints the final lists of slides seen

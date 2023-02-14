@@ -22,6 +22,9 @@ class CircularLinkedList:
             new_node.next = self.head
             current.next = new_node
 
+    def clear(self):
+        self.head = None
+
     def cycle(self):
         self.head = self.head.next
 
