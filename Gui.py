@@ -75,13 +75,17 @@ if __name__ == '__main__':
         Slide_length_change()
         set_drive_time()
         Sim.simulate_week()
-        print(Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign))
+        result_string = Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign)
         # print(len(Sim.STUDENT_LIST))
         # print(Sim.STUDENT_LIST[0].slides_seen)
         # print(Sim.sign.head)
+        results.configure(text=result_string)
     
     button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15,command=Submit)
     button5.place(x=390,y=140)
+    
+    results=tk.Label(background_label, text="Suuvbhj", fg='black', height=25, width=23)
+    results.place(x=0,y=190)
     root.mainloop()
 
 
