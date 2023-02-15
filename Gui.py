@@ -75,7 +75,7 @@ if __name__ == '__main__':
         Slide_length_change()
         set_drive_time()
         Sim.simulate_week()
-        Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign)
+        print(Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign))
         # print(len(Sim.STUDENT_LIST))
         # print(Sim.STUDENT_LIST[0].slides_seen)
         # print(Sim.sign.head)
