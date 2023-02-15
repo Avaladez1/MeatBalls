@@ -108,7 +108,7 @@ def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList)
     string_to_return = ""
     for i in range(len(percentages)):
         # print(f"Slide #{i+1} was seen by {percentages[i]*100}% of students.")
-        string_to_return += f"Slide #{i+1} was seen by {percentages[i]*100}% of students.\n"
+        string_to_return += f"Slide #{i+1} was seen by {round(percentages[i]*100, 3)}% of students.\n"
     return string_to_return
 
 def percentage_of_slides_seen(student: sq.Student) -> float:

@@ -84,7 +84,7 @@ if __name__ == '__main__':
     button5 = tk.Button(background_label, text="Submit", fg='black', height=2, width=15,command=Submit)
     button5.place(x=390,y=140)
     
-    results=tk.Label(background_label, text="Suuvbhj", fg='black', height=25, width=23)
+    results=tk.Label(background_label, text="Results", fg='black', height=25, width=40)
     results.place(x=0,y=190)
     root.mainloop()
 
