@@ -70,7 +70,7 @@ def elim_duplicates(slides:list):
     """
     Takes the list that it is given and turns it into a dictionary. This eliminates duplicate keys, and the result is turned back into a list and printed.
     """
-    Slides_seen = list(dict.fromkeys(slides))
+    slides = list(dict.fromkeys(slides))
     # print(student.driving_time, Slides_seen.value)
 
 def simulate_week():
@@ -108,21 +108,21 @@ def average_students_that_saw_slide(list: list, circular: ll.CircularLinkedList)
     string_to_return = ""
     for i in range(len(percentages)):
         # print(f"Slide #{i+1} was seen by {percentages[i]*100}% of students.")
-        string_to_return += f"Slide #{i+1} was seen by {round(percentages[i]*100, 3)}% of students.\n"
+        string_to_return += f"Slide #{i+1} was seen by {round(percentages[i]*100, 2)}% of students.\n"
     return string_to_return
 
 def percentage_of_slides_seen(student: sq.Student) -> float:
-    percentage = (len(student.slides_seen) / slide_length) * 100
+    percentage = (len(student.slides_seen) / number_of_slides) * 100
     return percentage
 
 def oble(list_of_students: list):
     percentages_list = []
     for student in list_of_students:
         percentages_list.append(percentage_of_slides_seen(student))
-    print(f"The average student saw {stat.mean(oble)}% of the slides.")
+    return f"The average student saw {round(stat.mean(percentages_list), 2)}% of the slides."
 
 
 
 # Example usage
 # simulate_week()
-# average_students_that_saw_slide(STUDENT_LIST, sign)
+# oble(STUDENT_LIST)
