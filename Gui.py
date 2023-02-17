@@ -76,6 +76,7 @@ if __name__ == '__main__':
         set_drive_time()
         Sim.simulate_week()
         result_string = Sim.average_students_that_saw_slide(Sim.STUDENT_LIST,Sim.sign)
+        result_string += Sim.oble(Sim.STUDENT_LIST)
         # print(len(Sim.STUDENT_LIST))
         # print(Sim.STUDENT_LIST[0].slides_seen)
         # print(Sim.sign.head)
